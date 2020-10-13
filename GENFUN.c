@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <time.h> 
 
+/*Nota 6
+
+No hicieron branch, no crearon la estructura de carpetas, nombres de sus variables sin sentido, no tienen indentacion, no diagramas
+*/
 
 void main(void)
 {
