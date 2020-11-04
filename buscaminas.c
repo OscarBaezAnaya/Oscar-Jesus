@@ -62,3 +62,110 @@ if
   }
   return Conteo;
 }
+int AleatorioEnRango(int Minimo, int Maximo)
+{
+  return Minimo + rand() / (Rand_Max / (Maximo - Minimo + 1) + 1);
+}
+void IniciarTablero(char Tablero[Filas][Columnas])
+{
+  int l;
+  for (l = 0; l < Filas; l++) {
+    int m;
+    for (m = 0; m < Columnas; m++) {
+      Tablero[l][m] = EscacioSinDescubrir;
+    }
+  }
+}
+
+void ColocarMina(int Fila, int Columna, char Tablero[Filas][Columnas])
+{
+  Tablero[Fila][Columna] = Mina;
+}
+void ColocarMinasAleatoriamente(char Tablero[Filas][Columnas]) {
+  int l;
+  for (l = 0; l < CantidadDeMinas; l++) {
+    int Fila = AleatorioEnRango(0, Filas- 1);
+    int Columna = AleatorioEnRango(0, Columnas - 1);
+    colocarMina(Fila, Columna, Tablero);
+  }
+}
+void imprimirSeparadorEncabezado() 
+{
+  int m;
+  for (m = 0; m <= Columnas; m++) 
+  {
+    printf("-----");
+    if (m + 2 == Columnas) 
+    {
+      printf("--");
+    }
+  }
+  printf("\n");
+}
+void ImprimirSeparadorFilas()
+{
+  int m;
+  for (m = 0; m <= Columnas; m++)
+  {
+    printf("+----");
+    if (m == Columnas) 
+    {
+      printf("+");
+    }
+  }
+  printf("\n");
+}
+void ImprimirEncabezado() {
+  ImprimirSeparadorEncabezado();
+  printf("|    ");
+  int l;
+  for (l = 0; l < Columnas; l++) {
+    printf("| %d ", l + 1);
+    if (l + 1 == Columnas) {
+      printf("|");
+    }
+  }
+  printf("\n");
+}
+char EnteroACaracter(int Numero)
+{
+  return Numero + '0';
+}
+
+void ImprimirTablero(char Tablero[Filas][Columnas], int DeberiaMostrarMinas)
+{
+  ImprimirEncabezado();
+  ImprimirSeparadorEncabezado();
+  char Letra = 'A';
+  int l;
+  for (l = 0; l < Filas; l++)
+  {
+    int m;
+    printf("| %c ", Letra);
+    Letra++;
+    for (m = 0; m < Columnas; m++)
+    {
+      char VerdaderaLetra = EscacioSinDescubrir;
+      char LetraActual = Tablero[l][m];
+      if (LetraActual == Mina)
+      {
+        VerdaderaLetra = EscacioSinDescubrir;
+      }
+      else if (LetraActual == EspacioDescubierto)
+      {
+        int MinasCercanas = ObtenerMinasCercanas(l, m, Tablero);
+        VerdaderaLetra = EnteroACaracter(MinasCercanas);
+      }
+      if (LetraActual == Mina && (DEBUG || DeberiaMostrarMinas))
+      {
+        VerdaderaLetra = Mina;
+      }
+      printf("| %c ", VerdaderaLetra);
+      if (m + 1 == Columnas) {
+        printf("|");
+      }
+    }
+    printf("\n");
+    imprimirSeparadorFilas();
+  }
+}
