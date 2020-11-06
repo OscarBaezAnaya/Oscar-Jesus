@@ -12,8 +12,7 @@
 #define EscacioSinDescubrir '#'
 #define EspacioDescubierto ' '
 #define Mina '@'
-#define CantidadDeMinas 225
-#define DEBUG 0 
+#define CantidadDeMinas 225 
 
 int MostrarMinasCercanas(int Fila, int Columna, char Tablero[Filas][Columnas])
 {
@@ -170,7 +169,7 @@ void ImprimirTablero(char Tablero[Filas][Columnas], int DeberiaMostrarMinas)
         int MinasCercanas = MostrarMinasCercanas(l, m, Tablero);
         VerdaderaLetra = EnteroACaracter (MinasCercanas);
       }
-      if (LetraActual == Mina && (DEBUG || DeberiaMostrarMinas))
+      if (LetraActual == Mina && DeberiaMostrarMinas)
       {
         VerdaderaLetra = Mina;
       }
