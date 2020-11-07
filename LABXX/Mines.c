@@ -252,6 +252,7 @@ uint8 x, CantidadDeMinas, e=1;
     scanf(" %c", &Fila);
     scanf(" %c", &Columna);
     printf("\n");
+    system("cls");
     uint8 status = AbrirCasilla(Fila, Columna, Tablero);
     if (NoHayCasillasSinAbrir(Tablero))
     {
@@ -270,5 +271,4 @@ uint8 x, CantidadDeMinas, e=1;
       DeberiaMostrarMinas = 1;
     }
   }
-  return 0;
 }
