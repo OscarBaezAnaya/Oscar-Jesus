@@ -8,3 +8,6 @@
 #define EspacioSinDescubrir '#'
 #define EspacioDescubierto ' '
 #define Mina '@'
+
+typedef unsigned int uint8;
+typedef unsigned int uint32;

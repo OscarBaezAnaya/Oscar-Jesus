@@ -4,11 +4,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include <Mines.h>
+#include "Mines.h"
 
-int MostrarMinasCercanas(int Fila, int Columna, char Tablero[Filas][Columnas])
+uint8 MostrarMinasCercanas(uint8 Fila, uint8 Columna, uint8 Tablero[Filas][Columnas])
 {
-int Conteo = 0, FilaInicio, FilaFin, ColumnaInicio, ColumnaFin;
+uint8 Conteo = 0, FilaInicio, FilaFin, ColumnaInicio, ColumnaFin;
 if (Fila <= 0)
 {
 FilaInicio = 0;
@@ -43,10 +43,10 @@ if
   {
     ColumnaFin = Columna + 1;
   }
-  int m;
+  uint8 m;
   for (m = FilaInicio; m <= FilaFin; m++)
   {
-    int l;
+    uint8 l;
     for (l = ColumnaInicio; l <= ColumnaFin; l++)
     {
       if (Tablero[m][l] == Mina) 
@@ -57,16 +57,16 @@ if
   }
   return Conteo;
 }
-int AleatorioEnRango(int Minimo, int Maximo)
+uint8 AleatorioEnRango(uint8 Minimo, uint8 Maximo)
 {
   return Minimo + rand() / (RAND_MAX / (Maximo - Minimo + 1) + 1);
 }
-void IniciarTablero(char Tablero[Filas][Columnas])
+void IniciarTablero(uint8 Tablero[Filas][Columnas])
 {
-    int l;
+    uint8 l;
     for (l = 0; l < Filas; l++) 
   {
-    int m;
+    uint8 m;
     for (m = 0; m < Columnas; m++) 
     {
       Tablero[l][m] = EspacioSinDescubrir;
@@ -74,23 +74,23 @@ void IniciarTablero(char Tablero[Filas][Columnas])
   }
 }
 
-void ColocarMina(int Fila, int Columna, char Tablero[Filas][Columnas])
+void ColocarMina(uint8 Fila, uint8 Columna, uint8 Tablero[Filas][Columnas])
 {
   Tablero[Fila][Columna] = Mina;
 }
-void ColocarMinasAleatoriamente(char Tablero[Filas][Columnas], int CantidadDeMinas)
+void ColocarMinasAleatoriamente(uint8 Tablero[Filas][Columnas], uint8 CantidadDeMinas)
 {
-  int l;
+  uint8 l;
   for (l = 0; l < CantidadDeMinas; l++)
   {
-    int Fila = AleatorioEnRango(0, Filas- 1);
-    int Columna = AleatorioEnRango(0, Columnas - 1);
+    uint8 Fila = AleatorioEnRango(0, Filas- 1);
+    uint8 Columna = AleatorioEnRango(0, Columnas - 1);
     ColocarMina(Fila, Columna, Tablero);
   }
 }
 void ImprimirSeparadorEncabezado() 
 {
-  int m;
+  uint8 m;
   for (m = 0; m <= Columnas; m++) 
   {
     printf("----");
@@ -103,7 +103,7 @@ void ImprimirSeparadorEncabezado()
 }
 void ImprimirSeparadorFilas()
 {
-  int m;
+  uint8 m;
   for (m = 0; m <= Columnas; m++)
   {
     printf("----");
@@ -118,11 +118,11 @@ void ImprimirEncabezado()
 {
   ImprimirSeparadorEncabezado();
   printf("|   ");
-  char Columna = 'A';
-  int l;
+  uint8 Columna = 'A';
+  uint8 l;
   for (l = 0; l < Columnas; l++)
   {
-    int m;
+    uint8 m;
     printf("| %c ", Columna);
     Columna++;
 if (l + 1 == Columnas)
@@ -132,33 +132,33 @@ if (l + 1 == Columnas)
     }
   printf("\n");
 }
-char EnteroACaracter(int Numero)
+uint8 EnteroACaracter(uint8 Numero)
 {
   return Numero + '0';
 }
 
-void ImprimirTablero(char Tablero[Filas][Columnas], int DeberiaMostrarMinas)
+void ImprimirTablero(uint8 Tablero[Filas][Columnas], uint8 DeberiaMostrarMinas)
 {
   ImprimirEncabezado();
   ImprimirSeparadorEncabezado();
-  char Letra = 'A';
-  int l;
+  uint8 Letra = 'A';
+  uint8 l;
   for (l = 0; l < Filas; l++)
   {
-    int m;
+    uint8 m;
     printf("| %c ", Letra);
     Letra++;
     for (m = 0; m < Columnas; m++)
     {
-      char VerdaderaLetra = EspacioSinDescubrir;
-      char LetraActual = Tablero[l][m];
+      uint8 VerdaderaLetra = EspacioSinDescubrir;
+      uint8 LetraActual = Tablero[l][m];
       if (LetraActual == Mina)
       {
         VerdaderaLetra = EspacioSinDescubrir;
       }
       else if (LetraActual == EspacioDescubierto)
       {
-        int MinasCercanas = MostrarMinasCercanas(l, m, Tablero);
+        uint8 MinasCercanas = MostrarMinasCercanas(l, m, Tablero);
         VerdaderaLetra = EnteroACaracter (MinasCercanas);
       }
       if (LetraActual == Mina && DeberiaMostrarMinas)
@@ -175,12 +175,12 @@ void ImprimirTablero(char Tablero[Filas][Columnas], int DeberiaMostrarMinas)
     ImprimirSeparadorFilas();
   }
 }
-int AbrirCasilla(char FilaLetra, char ColumnaLetra, char Tablero[Filas][Columnas])
+uint8 AbrirCasilla(uint8 FilaLetra, uint8 ColumnaLetra, uint8 Tablero[Filas][Columnas])
 {
   FilaLetra = toupper(FilaLetra);
   ColumnaLetra = toupper(ColumnaLetra);
-  int Fila = FilaLetra - 'A';
-  int Columna = ColumnaLetra - 'A';
+  uint8 Fila = FilaLetra - 'A';
+  uint8 Columna = ColumnaLetra - 'A';
   if (Tablero[Fila][Columna] == Mina) 
   {
     return MinaEncontrada;
@@ -192,15 +192,15 @@ int AbrirCasilla(char FilaLetra, char ColumnaLetra, char Tablero[Filas][Columnas
   Tablero[Fila][Columna] = EspacioDescubierto;
   return NingunError;
 }
-int NoHayCasillasSinAbrir(char Tablero[Filas][Columnas])
+uint8 NoHayCasillasSinAbrir(uint8 Tablero[Filas][Columnas])
 {
-  int l;
+  uint8 l;
   for (l = 0; l < Filas; l++)
   {
-    int m;
+    uint8 m;
     for (m = 0; m < Columnas; m++)
     {
-      char Actual = Tablero[l][m];
+      uint8 Actual = Tablero[l][m];
       if (Actual == EspacioSinDescubrir)
       {
         return 0;
@@ -209,9 +209,9 @@ int NoHayCasillasSinAbrir(char Tablero[Filas][Columnas])
   }
   return 1;
 }
-int main()
+uint8 main()
 {
-int x, SumaMinas, CantidadDeMinas, e=1;
+uint8 x, CantidadDeMinas, e=1;
 
     while (e == 1)
 {
@@ -234,8 +234,8 @@ int x, SumaMinas, CantidadDeMinas, e=1;
     }
 }
   printf("\n------------------------Juego De Buscaminas----------------------\n");
-  char Tablero[Filas][Columnas];
-  int DeberiaMostrarMinas = 0;
+  uint8 Tablero[Filas][Columnas];
+  uint8 DeberiaMostrarMinas = 0;
   srand(getpid());
   IniciarTablero(Tablero);
   ColocarMinasAleatoriamente(Tablero, CantidadDeMinas);
@@ -246,13 +246,13 @@ int x, SumaMinas, CantidadDeMinas, e=1;
     {
       break;
     }
-    int Columna;
-    char Fila;
+    uint8 Columna;
+    uint8 Fila;
     printf("Ingresa la fila y Columna: ");
     scanf(" %c", &Fila);
-    scanf("%c", &Columna);
+    scanf(" %c", &Columna);
     printf("\n");
-    int status = AbrirCasilla(Fila, Columna, Tablero);
+    uint8 status = AbrirCasilla(Fila, Columna, Tablero);
     if (NoHayCasillasSinAbrir(Tablero))
     {
       printf("Descubriste todas las casillas sin minas, ganaste\n");
