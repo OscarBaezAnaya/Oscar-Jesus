@@ -8,6 +8,7 @@
 #define JarabeTime   987654321
 #define hieloTime    987654321
 #define inicioTime   987654321
+#define vasoTime     987654321
 
 typedef unsigned char 	uint8; 
 typedef unsigned short 	uint16; 

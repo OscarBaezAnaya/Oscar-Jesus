@@ -15,7 +15,7 @@ void main (void)
   scanf ("%d", &hielo);
   if (hielo == 1)
     {
-      printf ("Vaso desplazandose\n");
+      printf ("\nVaso desplazandose\n");
       u8Delay = hieloTime;
       while(u8Delay--);
       printf("Sirviendo hielos a la bebida\n");
@@ -39,7 +39,7 @@ void main (void)
   printf ("4) $15 - Sprite\n");
   printf ("5) $10 - Lima\n");
   printf ("6) $30 - Ron\n");
-  printf ("7) $50 - Jarabe\n");
+  printf ("7) $50 - Jarabe\n\n");
   printf ("Seleccione el primer ingrediente de la bebida\n");
   scanf  ("%d", &bebida);
   printf ("Seleccione el segundo ingrediente de la bebida\n");
@@ -48,7 +48,7 @@ void main (void)
   scanf  ("%d", &bebida2);
   printf ("Seleccione el cuarto ingrediente de la bebida\n");
   scanf  ("%d", &bebida3);
-  printf ("Iniciando...\n\n");
+  printf ("\nIniciando...\n\n");
   u8Delay = inicioTime;
   while(u8Delay--);
 switch (bebida)
@@ -324,5 +324,8 @@ switch (bebida3)
       printf ("Desea otra bebida?\n");
       printf ("1) Si   2) No\n");
       scanf ("%d", &vaso);
+      printf("Colocando vaso limpio\n");
+      u8Delay = vasoTime;
+      while(u8Delay--);
 }
 }
