@@ -197,7 +197,7 @@ void main (void)
 				system("cls");
 				if(firstans==1)
 				{
-					printf("cual deseas quitar?\n1)tu primer licor\n2)tu segundo licor\n3)tu tercer licor\nninguno");
+					printf("cual deseas quitar?\n1)tu primer licor\n2)tu segundo licor\n3)tu tercer licor\n4)ninguno");
 					scanf("%d",&firstans);
 					if(firstans==1)
 					{
@@ -252,4 +252,5 @@ void main (void)
         while(u8Delay--);
         u8Delay = bebidatimes;
         while(u8Delay--);
+        printf("bebidas listas por favor recojalas, gracias por su preferencia");
 }
