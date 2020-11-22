@@ -30,3 +30,4 @@ typedef enum
 	priceagua=5,
 	pricedurazno=11,
 }SM_tenStates;
+//hola

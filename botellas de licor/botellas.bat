@@ -1,4 +1,4 @@
 echo compiling
-gcc botellas.c -o A
-A
+gcc botellas.c -o botellas
+botellas
 pause
